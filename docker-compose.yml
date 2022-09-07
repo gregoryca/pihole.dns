@@ -11,8 +11,6 @@ services:
       TZ: 'Europe/London'
       PUID: '1000'
       PGID: '1000'
-    cap_add:
-      - NET_ADMIN # Recommended but not required (DHCP needs NET_ADMIN)
     volumes:
       - './etc-pihole/:/etc/pihole/'
       - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
