@@ -6,7 +6,10 @@ services:
     image: pihole/pihole:latest
     ports:
       - "53:53/udp"
-      #- "67:67/udp"
+      - "53:53/tcp"
+      - "67:67/udp"
+    cap_add:
+        - NET_ADMIN
     environment:
       TZ: 'Europe/London'
       PUID: '1000'
@@ -16,11 +19,15 @@ services:
       - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
     networks: 
       - web-secure
+      - web
     restart: unless-stopped
     labels:
        - "traefik.enable=true"
 
        # web interface
+       - "traefik.http.routers.pihole.rule=Host(`pihole.cloud-migrations.nl`)"
+       - "traefik.http.routers.pihole.entrypoints=web"
+
        - "traefik.http.routers.pihole-secure.rule=Host(`pihole.cloud-migrations.nl`)"
        - "traefik.http.routers.pihole-secure.tls.certresolver=production"
        - "traefik.http.routers.pihole-secure.tls=true"
@@ -56,4 +63,6 @@ services:
 
 networks: 
   web-secure:
+    external: true
+  web:
     external: true

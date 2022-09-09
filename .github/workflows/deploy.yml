@@ -1,7 +1,7 @@
 ########################################################
 # This is a basic workflow to Deploy a Nextcloud stack #
 ########################################################
-name: Upgrade Pihole
+name: Deploy Nextcloud infra
 
 on:
   push:
@@ -29,12 +29,12 @@ jobs:
       # Deploys an ansible script to manage the traefik stack deployment #
       #####################################################################
       - uses: dawidd6/action-ansible-playbook@v2
-        name: Deploy Ansible script for Upgrade Pihole
+        name: Deploy Nextcloud
         with:
           ###############################
           # Required, playbook filepath #
           ###############################
-          playbook: upgrade.yml
+          playbook: deployment.yml
           ############################################
           # Optional, directory where playbooks live #
           ############################################
@@ -49,6 +49,7 @@ jobs:
           inventory: |
             [linux]
             server17a ansible_host=${{ secrets.HOST }} ansible_port=${{ secrets.PORT }}
+            
             [linux:vars]
             ansible_user = ${{ secrets.USERNAME }}
             ansible_sudo_pass = ${{ secrets.PASSWORD }}
