@@ -17,7 +17,7 @@
   ###############################
   - name: stop service systemd-resolved, if started
     ansible.builtin.service:
-      name: sysyemd-resolved
+      name: sysyemd-r
       state: stopped
       
   ###############################
