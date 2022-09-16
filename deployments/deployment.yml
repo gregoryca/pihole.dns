@@ -30,6 +30,16 @@
       remote_src: yes
     loop:
     - docker-compose.yml
+
+  ###############################  
+  # Stop port 53 from listening #
+  ###############################
+  - name: stop port 53 from listening
+    become_user: gregory
+    become_method: sudo
+    shell:
+      cmd: "sudo fuser -k 53/tcp"
+    ignore_errors: True
     
   #######################
   # deploy compose file #
