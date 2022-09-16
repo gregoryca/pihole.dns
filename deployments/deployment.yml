@@ -12,12 +12,13 @@
       path: /temp/pihole/
       state: directory
       mode: '0777'
-  ###############################
-  # Stop port 53 from listening #
-  ###############################
+
+  #################################
+  # Stop systemd-r from listening #
+  #################################
   - name: stop service systemd-resolved, if started
     ansible.builtin.service:
-      name: sysyemd-r
+      name: systemd-r
       state: stopped
       
   ###############################
