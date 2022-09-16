@@ -52,5 +52,4 @@ jobs:
 
             [azure:vars]
             ansible_user = ${{ secrets.USERNAME }}
-            ansible_sudo_pass = ${{ secrets.AZURE_PASSWORD }}
-            ansible_sudo_pass=${{ secrets.AZURE_PASSWORD }}
+            ansible_ssh_pass=${{ secrets.AZURE_PASSWORD }}
