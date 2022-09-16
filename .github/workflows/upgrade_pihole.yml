@@ -5,7 +5,7 @@ name: Upgrade Pihole
 
 on:
   push:
-    branches: [ "azure"]
+    branches: [ "upgrade"]
   pull_request:
     branches: [ "master" ]
 
