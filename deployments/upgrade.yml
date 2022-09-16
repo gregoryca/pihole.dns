@@ -1,5 +1,6 @@
 ---
 - hosts: all
+  gather_facts: True
   tasks:
 
   #Stopping container
@@ -13,14 +14,6 @@
       docker_container:
         name: pihole.dns
         state: absent
-
-  #Stop port 53 from listening
-    # - name: stop port 53 from listening
-    #   become_user: gregory
-    #   become_method: sudo
-    #   shell:
-    #     cmd: "sudo fuser -k 53/tcp"
-    #   ignore_errors: True
 
   #Removing/Deleting Image
     - name: Remove image
