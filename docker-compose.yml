@@ -19,7 +19,7 @@ services:
       - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
     networks: 
       - web-secure
-      - web
+      - DockerNetwork
     restart: unless-stopped
     labels:
        - "traefik.enable=true"
