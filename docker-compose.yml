@@ -64,5 +64,5 @@ services:
 networks: 
   web-secure:
     external: true
-  web:
+  DockerNetwork:
     external: true
