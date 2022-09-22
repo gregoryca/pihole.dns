@@ -19,7 +19,7 @@ services:
       - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
     networks: 
       - web-secure
-      - DockerNetwork
+      - DHCP
     restart: unless-stopped
     labels:
        - "traefik.enable=true"
@@ -64,5 +64,5 @@ services:
 networks: 
   web-secure:
     external: true
-  DockerNetwork:
+  DHCP:
     external: true
