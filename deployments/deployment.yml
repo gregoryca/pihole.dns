@@ -1,6 +1,7 @@
 ---
 - hosts: all
   become: true
+  become_user: gregory
   gather_facts: True
   tasks:
   
