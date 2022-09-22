@@ -10,7 +10,7 @@
   #####################################
   - name: Create a temporary directory if it does not exist
     ansible.builtin.file:
-      path: /temp/pihole/
+      path: ~/temp/pihole/
       state: directory
       mode: '0777'
       
@@ -20,14 +20,14 @@
   - name: Checkout the git Pihole repo
     ansible.builtin.git:
       repo: 'https://github.com/gregoryca/pihole.dns.git'
-      dest: /temp/pihole/
+      dest: ~/temp/pihole/
 
   #########################
   # Copy the compose file #
   #########################
   - name: copy git repo to remote server
     copy:
-      src: /temp/pihole
+      src: ~/temp/pihole
       dest: ~/srv/
       remote_src: yes
     
@@ -47,7 +47,7 @@
   - name: Delete content & directory
     file:
       state: absent
-      path: /temp/
+      path: ~/temp/
 
   ############################################
   # Post result on CMD line after deployment #
