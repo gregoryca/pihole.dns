@@ -28,10 +28,7 @@
 /setupVars.conf
 /setupVars.conf.update.bak
 /web-secure-networkpolicy.yaml
-<<<<<<< HEAD
 /config
-=======
-/config
->>>>>>> 962ec51a56e7389fc7088573d4930c0bdaa049d6
 deployments/ansible.cfg
 deployments/inventory
+.env
