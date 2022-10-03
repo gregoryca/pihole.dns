@@ -19,6 +19,7 @@ services:
       - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
     networks: 
       - web-secure
+      - DHCP
     restart: unless-stopped
     labels:
        - "traefik.enable=true"
