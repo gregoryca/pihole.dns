@@ -24,10 +24,10 @@ services:
        - "traefik.enable=true"
 
        # web interface
-       #- "traefik.http.routers.pihole.rule=Host(`pihole.cloud-migrations.nl`)"
+       #- "traefik.http.routers.pihole.rule=Host(`pihole.apex-migrations.net`)"
        #- "traefik.http.routers.pihole.entrypoints=web"
 
-       - "traefik.http.routers.pihole-secure.rule=Host(`pihole.cloud-migrations.nl`)"
+       - "traefik.http.routers.pihole-secure.rule=Host(`pihole.apex-migrations.net`)"
        - "traefik.http.routers.pihole-secure.tls.certresolver=production"
        - "traefik.http.routers.pihole-secure.tls=true"
        - "traefik.http.routers.pihole-secure.entrypoints=web-secure"
@@ -36,13 +36,13 @@ services:
        - "traefik.http.routers.pihole-secure.middlewares=authelia-secure@docker"
 
        # DNS-over-TLS
-       - "traefik.tcp.routers.dnsovertls.rule=HostSNI(`853.cloud-migrations.nl`)"
+       - "traefik.tcp.routers.dnsovertls.rule=HostSNI(`853.apex-migrations.net`)"
        - "traefik.tcp.routers.dnsovertls.tls.certresolver=productiontls"
        - "traefik.tcp.routers.dnsovertls.entrypoints=dnsovertls"
        - "traefik.tcp.services.pihole.loadbalancer.server.port=853"
 
        # DNS-over-HTTPS
-       - "traefik.tcp.routers.dnsoverhttps.rule=HostSNI(`443.cloud-migrations.nl`)"
+       - "traefik.tcp.routers.dnsoverhttps.rule=HostSNI(`443.apex-migrations.net`)"
        - "traefik.tcp.routers.dnsoverhttps.tls.certresolver=productiontls"
        - "traefik.tcp.routers.dnsoverhttps.entrypoints=web-secure"
        - "traefik.tcp.services.pihole.loadbalancer.server.port=443"
