@@ -24,9 +24,6 @@ services:
        - "traefik.enable=true"
 
        # web interface
-       #- "traefik.http.routers.pihole.rule=Host(`pihole.apex-migrations.net`)"
-       #- "traefik.http.routers.pihole.entrypoints=web"
-
        - "traefik.http.routers.pihole-secure.rule=Host(`pihole.apex-migrations.net`)"
        - "traefik.http.routers.pihole-secure.tls.certresolver=production"
        - "traefik.http.routers.pihole-secure.tls=true"
