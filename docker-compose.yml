@@ -34,13 +34,13 @@ services:
 
        # DNS-over-TLS
        - "traefik.tcp.routers.dnsovertls.rule=HostSNI(`853.apex-migrations.net`)"
-       - "traefik.tcp.routers.dnsovertls.tls.certresolver=productiontls"
+       - "traefik.tcp.routers.dnsovertls.tls.certresolver=production"
        - "traefik.tcp.routers.dnsovertls.entrypoints=dnsovertls"
        - "traefik.tcp.services.pihole.loadbalancer.server.port=853"
 
        # DNS-over-HTTPS
        - "traefik.tcp.routers.dnsoverhttps.rule=HostSNI(`443.apex-migrations.net`)"
-       - "traefik.tcp.routers.dnsoverhttps.tls.certresolver=productiontls"
+       - "traefik.tcp.routers.dnsoverhttps.tls.certresolver=production"
        - "traefik.tcp.routers.dnsoverhttps.entrypoints=web-secure"
        - "traefik.tcp.services.pihole.loadbalancer.server.port=443"
 
