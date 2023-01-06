@@ -30,7 +30,7 @@
   #deploy compose file
     - name: deploy Docker Compose stack
       docker_compose:
-        project_src: /home/gregory/srv/pihole/
+        project_src: ~/srv/pihole/
         files:
         - docker-compose.yml
         recreate: always
