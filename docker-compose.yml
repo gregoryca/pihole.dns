@@ -10,8 +10,6 @@ services:
       - "53:53/tcp"
       - "67:67/udp"
       - "8081:80"
-    dns:
-      - 192.168.2.100
     cap_add:
       - NET_ADMIN
     environment:
