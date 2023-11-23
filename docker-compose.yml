@@ -3,12 +3,15 @@ version: "3"
 services:
   pihole:
     container_name: pihole.dns
+    hostname: pihole.dns
     image: pihole/pihole:latest
     ports:
       - "53:53/udp"
       - "53:53/tcp"
       - "67:67/udp"
       - "8081:80"
+    dns:
+      - 192.168.2.100
     cap_add:
       - NET_ADMIN
     environment:
@@ -37,26 +40,27 @@ services:
       - "traefik.tcp.routers.dnsovertls.rule=HostSNI(`853.apex-migrations.net`)"
       - "traefik.tcp.routers.dnsovertls.tls.certresolver=production"
       - "traefik.tcp.routers.dnsovertls.entrypoints=dnsovertls"
-      - "traefik.tcp.services.pihole.loadbalancer.server.port=853"
+      - "traefik.tcp.routers.dnsovertls.service=pihole"
+      #- "traefik.tcp.services.pihole.loadbalancer.server.port=853"
 
       # DNS-over-HTTPS
       - "traefik.tcp.routers.dnsoverhttps.rule=HostSNI(`443.apex-migrations.net`)"
       - "traefik.tcp.routers.dnsoverhttps.tls.certresolver=production"
       - "traefik.tcp.routers.dnsoverhttps.entrypoints=web-secure"
-      - "traefik.tcp.services.pihole.loadbalancer.server.port=443"
+      - "traefik.tcp.routers.dnsoverhttps.service=pihole"
+      #- "traefik.tcp.services.pihole.loadbalancer.server.port=443"
 
       # Normal DNS coming in on 53 TCP, no TLS
       - "traefik.tcp.routers.dns.entrypoints=dns"
       - "traefik.tcp.routers.dns.service=pihole"
+
+      # recieves traffic from both the TLS and non-TLS traefik routers
       - "traefik.tcp.services.pihole.loadbalancer.server.port=53"
 
       # Normal DNS coming in on 53 UDP
       - "traefik.udp.routers.udpdns.entrypoints=udpdns"
       - "traefik.udp.routers.udpdns.service=pihole"
       - "traefik.udp.services.pihole.loadbalancer.server.port=53/udp"
-
-      #Enable watchtower to watch container for new releases
-      - com.centurylinklabs.watchtower.enable=true
 
 networks:
   web-secure:
