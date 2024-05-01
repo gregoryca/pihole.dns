@@ -30,9 +30,8 @@
         source: pull
 
   #deploy compose file
-    - name: deploy Docker Compose stack
-      docker_compose:
-        project_src: ~/srv/pihole/
-        files:
-        - docker-compose.yml
-        recreate: always
+    - name: start the docker container
+      docker_container:
+        name: pihole.dns
+        image: pihole/pihole:latest
+        state: started
