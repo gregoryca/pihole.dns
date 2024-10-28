@@ -23,7 +23,7 @@ services:
       - "traefik.enable=true"
 
       # web interface
-      - "traefik.http.routers.pihole-secure.rule=Host(`pihole.apex-migrations.net`)"
+      - "traefik.http.routers.pihole-secure.rule=Host(`pihole-dokploy.apex-migrations.net`)"
       - "traefik.http.routers.pihole-secure.tls.certresolver=production"
       - "traefik.http.routers.pihole-secure.tls=true"
       - "traefik.http.routers.pihole-secure.entrypoints=web-secure"
@@ -43,7 +43,3 @@ services:
       - "traefik.tcp.routers.dnsoverhttps.entrypoints=web-secure"
       - "traefik.tcp.routers.dnsoverhttps.service=pihole-pihole@docker"
       #- "traefik.tcp.services.pihole.loadbalancer.server.port=443"
-
-networks:
-  web-secure:
-    external: true
