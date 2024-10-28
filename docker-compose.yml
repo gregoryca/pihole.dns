@@ -16,8 +16,6 @@ services:
     volumes:
       - './etc-pihole/:/etc/pihole/'
       - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
-    networks:
-      - web-secure
     restart: unless-stopped
     labels:
       - "traefik.enable=true"
