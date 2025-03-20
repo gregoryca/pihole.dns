@@ -8,25 +8,22 @@
     - name: create and start docker compose services
       community.docker.docker_compose_v2:
         project_src: ~/srv/pihole
-        
+
     - name: stop and remove docker compose services
       community.docker.docker_compose_v2:
         project_src: ~/srv/pihole
         state: absent
 
-  #Removing/Deleting Image
-    - name: Remove image
+    - name: Remove image pihole image
       docker_image:
         name: pihole/pihole:latest
         state: absent
 
-  #Pull latest version Image
-    - name: pull an image
+    - name: pull latest version
       docker_image:
         name: pihole/pihole
         source: pull
 
-  #Start container
     - name: create and start docker compose services
       community.docker.docker_compose_v2:
         project_src: ~/srv/pihole

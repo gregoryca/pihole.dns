@@ -5,58 +5,37 @@
   gather_facts: True
   tasks:
   
-  #########################################
-  # Creating a temp directory on the host #
-  #########################################
   - name: Create a temporary directory if it does not exist
     ansible.builtin.file:
       path: ~/temp/pihole/
       state: directory
       mode: '0777'
       
-  ############################
-  # Checkout the Pihole Repo #
-  ############################
   - name: Checkout the git Pihole repo
     ansible.builtin.git:
       repo: 'https://github.com/gregoryca/pihole.dns.git'
       dest: ~/temp/pihole/
 
-  ########################################
-  # Creating a srv directory on the host #
-  ########################################  
   - name: Create the srv directory if it does not exist
     ansible.builtin.file:
       path: ~/srv/
       state: directory
       mode: '0777'
 
-  #########################
-  # Copy the compose file #
-  #########################
   - name: copy git repo to remote server
     copy:
       src: ~/temp/pihole
       dest: ~/srv/
       remote_src: yes
-    
-  #######################
-  # Deploy compose file #
-  #######################
+
   - name: create and start docker compose services
     community.docker.docker_compose_v2:
       project_src: ~/srv/pihole
 
-  #########################################
-  # Clean up temp folder after deployment #
-  #########################################
   - name: Delete content & directory
     file:
       state: absent
       path: ~/temp/
 
-  ############################################
-  # Post result on CMD line after deployment #
-  ############################################
   - debug:
       var: ansible_facts["cmdline"]
