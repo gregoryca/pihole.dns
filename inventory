@@ -1,0 +1,47 @@
+[home]
+server17a ansible_host=192.168.2.100
+
+[nextcloud]
+nextcloud-lvm ansible_host=192.168.2.116
+
+[nextcloud:vars]
+ansible_ssh_user=gregory
+ansible_ssh_private_key_file=~/.ssh/id_rsa
+ansible_sudo_pass=laliloe
+
+[home:vars]
+ansible_ssh_user=gregory
+ansible_ssh_private_key_file=~/.ssh/id_rsa
+ansible_sudo_pass=laliloe
+
+[vps]
+GregoryacDevOps@dc-srv-01.apex-migrations.net
+
+[vps:vars]
+ansible_ssh_user=GregoryacDevOps
+ansible_ssh_private_key_file=~/.ssh/id_rsa
+
+[proxmox]
+pve ansible_host=pve
+
+[proxmox:vars]
+ansible_ssh_user=root
+ansible_ssh_private_key_file=~/.ssh/id_rsa
+ansible_sudo_pass=laliloe
+
+[rancher_ui]
+rancher-ui ansible_host=192.168.2.125 new_hostname=rancher-01
+
+[rancher_ui:vars]
+ansible_ssh_private_key_file=~/.ssh/id_rsa
+ansible_sudo_pass=laliloe
+
+[kubernetes]
+vm-01 ansible_host=192.168.2.132
+vm-02 ansible_host=192.168.2.133
+vm-03 ansible_host=192.168.2.131
+
+[kubernetes:vars]
+ansible_ssh_private_key_file=~/.ssh/id_rsa
+ansible_sudo_pass=laliloe
+ansible_ssh_user=server

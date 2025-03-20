@@ -5,16 +5,13 @@
   gather_facts: True
   tasks:
 
-  #Stopping container
-    - name: Stop the docker container
-      docker_container:
-        name: pihole.dns
-        state: stopped
-
-  #Removing/Deleting container
-    - name: Remove container
-      docker_container:
-        name: pihole.dns
+    - name: create and start docker compose services
+      community.docker.docker_compose_v2:
+        project_src: ~/srv/pihole
+        
+    - name: stop and remove docker compose services
+      community.docker.docker_compose_v2:
+        project_src: ~/srv/pihole
         state: absent
 
   #Removing/Deleting Image
@@ -29,9 +26,7 @@
         name: pihole/pihole
         source: pull
 
-  #deploy compose file
-    - name: start the docker container
-      docker_container:
-        name: pihole.dns
-        image: pihole/pihole:latest
-        state: started
+  #Start container
+    - name: create and start docker compose services
+      community.docker.docker_compose_v2:
+        project_src: ~/srv/pihole
