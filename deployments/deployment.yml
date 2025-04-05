@@ -4,13 +4,13 @@
   become_user: root
   gather_facts: false
   tasks:
-  
+
   - name: Create a temporary directory if it does not exist
     ansible.builtin.file:
       path: ~/temp/pihole/
       state: directory
       mode: '0777'
-      
+
   - name: Checkout the git Pihole repo
     ansible.builtin.git:
       repo: 'https://github.com/gregoryca/pihole.dns.git'
