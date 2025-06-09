@@ -4,10 +4,6 @@ services:
     container_name: pihole.dns
     hostname: pihole.dns
     image: pihole/pihole:latest
-    ports:
-      - "53:53/udp"
-      - "53:53/tcp"
-      - "67:67"
     cap_add:
       - NET_ADMIN
     environment:
@@ -17,9 +13,8 @@ services:
     volumes:
       - './etc-pihole/:/etc/pihole/'
       - './etc-dnsmasq.d/:/etc/dnsmasq.d/'
-    networks:
-      - web-secure
     restart: unless-stopped
+    network_mode: host
     labels:
       - "traefik.enable=true"
 
@@ -44,7 +39,3 @@ services:
       - "traefik.tcp.routers.dnsoverhttps.entrypoints=web-secure"
       - "traefik.tcp.routers.dnsoverhttps.service=pihole-pihole@docker"
       #- "traefik.tcp.services.pihole.loadbalancer.server.port=443"
-
-networks:
-  web-secure:
-    external: true
